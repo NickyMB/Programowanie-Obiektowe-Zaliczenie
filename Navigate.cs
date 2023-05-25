@@ -9,7 +9,7 @@ namespace Bibiotekav2
     internal class Navigate
     {
         //Nawigacje:
-        public static string[] MainNav = { "1 - Pokaż Menu", "2 - Pokaż książki", "3 - Zaloguj się", "4 - Menu item4", "5 - Menu item5", "Q - Exit" };
+        public static string[] MainNav = { "1 - Pokaż Menu", "2 - Zaloguj się", "3 - Pokaż książki", "4 - Menu item4", "5 - Menu item5", "Q - Exit" };
         public static string[] Login = { "1 - Register", "2 - Login", "Q - Exit" };
         public static string[] Books = { "1 - Pokaż książki", "2 - Pokaż autorów", "Q - Exit" };
 
@@ -23,23 +23,26 @@ namespace Bibiotekav2
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.D1:
+                        Console.Clear();
                         Box.Border(Navigate.MainNav);
                         break;
                     case ConsoleKey.D2:
-                        Loging.LoginPanel();
+                        Console.Clear();
+                        Loging.LoginNav();
                         break;
                     case ConsoleKey.D3:
+                        Console.Clear();
                         Box.Border(Navigate.Books);
                         break;
                     case ConsoleKey.Q:
+                        Console.Clear();
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Wybrano nieobsługiwany klawisz.");
+                        Console.WriteLine("Wybrano nieobsługiwany klawisz");
                         break;
                 }
             }
         }
-
     }
 }

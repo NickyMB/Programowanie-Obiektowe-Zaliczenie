@@ -10,7 +10,9 @@ namespace Bibiotekav2
     {
         public static void Border(string[] names)
         {
-            Console.Clear();
+            Random random = new Random();
+            ConsoleColor randomColor = (ConsoleColor)random.Next(1, 16); // Generuje losowy kolor czcionki
+            Console.ForegroundColor = randomColor;
             // Definicje znaków do rysowania kwadratu
             int TerminalWidth = Console.WindowWidth;
             int TerminalHeight = Console.WindowHeight;
@@ -29,12 +31,24 @@ namespace Bibiotekav2
                 Console.Write(KPO);
             }
             Console.WriteLine(KPG);
-
             foreach (string line in names)
             {
-                Console.Write(KPI);
-                Console.Write(line.PadRight(TerminalWidth - 2));
-                Console.WriteLine(KPI);
+
+                if (line == "Q - Exit")
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(KPI);
+                    Console.Write(line.PadRight(TerminalWidth - 2));
+                    Console.WriteLine(KPI);
+                }
+                else
+                {
+                    randomColor = (ConsoleColor)random.Next(1, 16); // Generuje losowy kolor czcionki
+                    Console.ForegroundColor = randomColor;
+                    Console.Write(KPI);
+                    Console.Write(line.PadRight(TerminalWidth - 2));
+                    Console.WriteLine(KPI);
+                }
             }
 
             Console.Write(KLD);
@@ -43,6 +57,7 @@ namespace Bibiotekav2
                 Console.Write(KPO);
             }
             Console.WriteLine(KPD);
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
