@@ -1,8 +1,0 @@
-C:\Users\mikol\OneDrive\WSB\Programowanie-Obiektowe-Praktyka\Zaliczenie\Biblioteka\bin\Release\Biblioteka.exe.config
-C:\Users\mikol\OneDrive\WSB\Programowanie-Obiektowe-Praktyka\Zaliczenie\Biblioteka\bin\Release\Biblioteka.exe
-C:\Users\mikol\OneDrive\WSB\Programowanie-Obiektowe-Praktyka\Zaliczenie\Biblioteka\bin\Release\Biblioteka.pdb
-C:\Users\mikol\OneDrive\WSB\Programowanie-Obiektowe-Praktyka\Zaliczenie\Biblioteka\obj\Release\Biblioteka.csproj.AssemblyReference.cache
-C:\Users\mikol\OneDrive\WSB\Programowanie-Obiektowe-Praktyka\Zaliczenie\Biblioteka\obj\Release\Biblioteka.csproj.SuggestedBindingRedirects.cache
-C:\Users\mikol\OneDrive\WSB\Programowanie-Obiektowe-Praktyka\Zaliczenie\Biblioteka\obj\Release\Biblioteka.csproj.CoreCompileInputs.cache
-C:\Users\mikol\OneDrive\WSB\Programowanie-Obiektowe-Praktyka\Zaliczenie\Biblioteka\obj\Release\Biblioteka.exe
-C:\Users\mikol\OneDrive\WSB\Programowanie-Obiektowe-Praktyka\Zaliczenie\Biblioteka\obj\Release\Biblioteka.pdb
