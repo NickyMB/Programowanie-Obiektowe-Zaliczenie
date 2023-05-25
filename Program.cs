@@ -14,7 +14,7 @@ namespace Bibiotekav2
                 int borowerNumber = Borrower.GenerateBorrowerNumber();
                 borowersNumber.Add(borowerNumber);
                 //Console.WriteLine("Generated number is : " + borowerNumber);
-                Navigate.Interface();
+                Navigate.Navigation();
                 Console.ReadKey();
 
 
