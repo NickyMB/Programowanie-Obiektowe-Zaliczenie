@@ -49,7 +49,6 @@ namespace Bibiotekav2
             Borrow_date = borrow_date;
             Return_date = return_date;
         }
-
         // generate unique borrower number
         public static int GenerateBorrowerNumber()
         {
@@ -69,6 +68,4 @@ namespace Bibiotekav2
             return ran;
         }
     }
-
-    
 }

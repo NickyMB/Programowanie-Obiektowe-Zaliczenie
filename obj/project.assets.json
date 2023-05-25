@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mikol\\OneDrive\\WSB\\Programowanie-Obiektowe-Praktyka\\Zaliczenie\\Bibiotekav2\\Bibiotekav2.csproj",
+      "projectUniqueName": "C:\\Users\\mikol\\OneDrive\\WSB\\Programowanie-Obiektowe-Zaliczenie\\Bibiotekav2.csproj",
       "projectName": "Bibiotekav2",
-      "projectPath": "C:\\Users\\mikol\\OneDrive\\WSB\\Programowanie-Obiektowe-Praktyka\\Zaliczenie\\Bibiotekav2\\Bibiotekav2.csproj",
+      "projectPath": "C:\\Users\\mikol\\OneDrive\\WSB\\Programowanie-Obiektowe-Zaliczenie\\Bibiotekav2.csproj",
       "packagesPath": "C:\\Users\\mikol\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mikol\\OneDrive\\WSB\\Programowanie-Obiektowe-Praktyka\\Zaliczenie\\Bibiotekav2\\obj\\",
+      "outputPath": "C:\\Users\\mikol\\OneDrive\\WSB\\Programowanie-Obiektowe-Zaliczenie\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
