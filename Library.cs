@@ -13,7 +13,6 @@ namespace Bibiotekav2
         {
             while (true)
             {
-                ReadFromFile();
                 Box.Border(Navigate.Books);
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 switch (keyInfo.Key)
@@ -22,13 +21,19 @@ namespace Bibiotekav2
                         ShowLibrary();
                         break;
                     case ConsoleKey.D2:
-                        //Login();
+                        ShowAuthors();
+                        break;
+                    case ConsoleKey.D3:
+                        SearchBookbByTitle();
+                        break;
+                    case ConsoleKey.D4:
+                        SearchBookbByAuthor();
                         break;
                     case ConsoleKey.Q:
                         Navigate.Navigation();
                         break;
                     default:
-                        Console.WriteLine("Invalid choice. Please try again.");
+                        Console.WriteLine("Niewłaściwy wybór, wybierz ponownie");
                         break;
                 }
             }
@@ -38,6 +43,65 @@ namespace Bibiotekav2
             foreach (Book book in booksList)
             {
                 Console.WriteLine($"{book.Title} {book.Author}");
+            }
+        }
+        public static void ShowAuthors()
+        {
+            HashSet<string> uniqueAuthors = new HashSet<string>();
+
+            foreach (var book in booksList)
+            {
+                uniqueAuthors.Add(book.Author);
+            }
+
+            foreach (var author in uniqueAuthors)
+            {
+                Console.WriteLine(author);
+            }
+        }
+        public static void SearchBookbByTitle()
+        {
+            List<Book> matchingBooks = new List<Book>();
+            Console.WriteLine("Podaj nazwę książki do wyszukania:");
+            string searchName = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Prosze Podaj nazwę książki do wyszukania:");
+                searchName = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(searchName))
+                {
+                }
+                else
+                {
+                    matchingBooks = booksList.Where(book => book.Title.IndexOf(searchName, StringComparison.CurrentCultureIgnoreCase) >= 0).ToList();
+                }
+            } while (string.IsNullOrEmpty(searchName));
+            foreach (Book book in matchingBooks)
+            {
+                Console.WriteLine($"\n{book.Title} {" | "} {book.Author}");
+            }
+        }
+        public static void SearchBookbByAuthor()
+        {
+            List<Book> matchingBooks = new List<Book>();
+            Console.WriteLine("Podaj imię autora do wyszukania:");
+            string searchName = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Prosze Podaj imię autora do wyszukania:");
+                searchName = Console.ReadLine();
+                if (string.IsNullOrEmpty(searchName))
+                {
+                }
+                else
+                {
+                    matchingBooks = booksList.Where(book => book.Author.IndexOf(searchName, StringComparison.CurrentCultureIgnoreCase) >= 0).ToList();
+                }
+            } while (string.IsNullOrEmpty(searchName));
+            foreach (Book book in matchingBooks)
+            {
+                Console.WriteLine($"\n{book.Title} {" | "} {book.Author}");
             }
         }
         public static void ReadFromFile()
@@ -56,7 +120,7 @@ namespace Bibiotekav2
                     {
                         string title = elements[0].Trim();
                         string author = elements[1].Trim();
-                        double isbnNumber = Convert.ToDouble(elements[2].Trim());
+                        string isbnNumber = Convert.ToString(elements[2].Trim());
                         string publisher = elements[3].Trim();
                         string publicationYear = Convert.ToString(elements[4].Trim());
                         string category = elements[5].Trim();

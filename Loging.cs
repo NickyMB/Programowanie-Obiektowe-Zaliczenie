@@ -11,7 +11,7 @@ class Loging
 
     public static void LoginNav()
     {
-        Console.WriteLine("Welcome to the Login and Register Panel!");
+        Console.WriteLine("Witamy w panelu Logowania/Rejestracji!");
 
         while (true)
         {
@@ -27,10 +27,10 @@ class Loging
                     Login();
                     break;
                 case ConsoleKey.Q:
-                    Navigate.Navigation();
+                    Environment.Exit(0);
                     break;
                 default:
-                    Console.WriteLine("Invalid choice. Please try again.");
+                    Console.WriteLine("Niewłaściwy wybór, wybierz ponownie");
                     break;
             }
         }
@@ -85,6 +85,8 @@ class Loging
         {
             Console.WriteLine("Welcome, " + username + "!");
             Console.Title = $"Twoja Biblioteka - {username}";
+
+            Navigate.Navigation();
         }
         else
         {

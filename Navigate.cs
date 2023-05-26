@@ -11,7 +11,7 @@ namespace Bibiotekav2
         //Nawigacje:
         public static string[] MainNav = { "1 - Pokaż Menu", "2 - Zaloguj się", "3 - Pokaż książki", "4 - Menu item4", "5 - Menu item5", "Q - Exit" };
         public static string[] Login = { "1 - Register", "2 - Login", "Q - Exit" };
-        public static string[] Books = { "1 - Pokaż książki", "2 - Pokaż autorów", "Q - Exit" };
+        public static string[] Books = { "1 - Pokaż książki", "2 - Pokaż autorów", "3 - Wyszukaj książkę po tytule", "4 - Wyszukaj książkę po autorze", "Q - Exit" };
 
         public static void Navigation()
         {
@@ -39,7 +39,7 @@ namespace Bibiotekav2
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Wybrano nieobsługiwany klawisz");
+                        Console.WriteLine("Niewłaściwy wybór, wybierz ponownie");
                         break;
                 }
             }

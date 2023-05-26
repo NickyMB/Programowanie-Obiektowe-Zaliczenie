@@ -10,7 +10,7 @@ namespace Bibiotekav2
     {
         public string Title { get; set; }
         public string Author { get; set; }
-        public double ISBN_number { get; set; }
+        public string ISBN_number { get; set; }
         public string Publisher { get; set; }
         public string Publication_year { get; set; }
         public string Category { get; set; }
@@ -19,7 +19,7 @@ namespace Bibiotekav2
          public DateTime Borrow_date { get; set; }
          public DateTime Return_date { get; set; } */
 
-        public Book(string title, string author, double isbn_number, string publisher, string publication_year, string category, bool available/*,  string borrower, DateTime borrow_date, DateTime return_date */)
+        public Book(string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available/*,  string borrower, DateTime borrow_date, DateTime return_date */)
         {
             Title = title;
             Author = author;
