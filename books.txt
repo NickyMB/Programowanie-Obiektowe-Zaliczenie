@@ -1,0 +1,4 @@
+Mały Książe;Antoine de Saint-Exupéry;9783140464079;Wilga;2018-02-28;Literatura dziecięca;true
+Metro 2033;Dmitrij Gluchowski;9789491425004;Insignis;2015-11-04;Fantastyka postapokaliptyczna;true
+Metro 2034;Dmitrij Gluchowski;9782841725434;Insignis;2015-11-04;Fantastyka postapokaliptyczna;true
+Metro 2035;Dmitrij Gluchowski;9783453315556;Insignis;2015-11-04;Fantastyka postapokaliptyczna;true

@@ -32,7 +32,7 @@ namespace Bibiotekav2
                         break;
                     case ConsoleKey.D3:
                         Console.Clear();
-                        Box.Border(Navigate.Books);
+                        Library.Start();
                         break;
                     case ConsoleKey.Q:
                         Console.Clear();

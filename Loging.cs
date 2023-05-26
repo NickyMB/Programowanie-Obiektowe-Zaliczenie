@@ -1,7 +1,14 @@
-﻿using Bibiotekav2;
+﻿using System;
+using Bibiotekav2;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Security.Cryptography; // ad1
 
 class Loging
 {
+    private static Dictionary<string, string> users = new Dictionary<string, string>();
+
     public static void LoginNav()
     {
         Console.WriteLine("Welcome to the Login and Register Panel!");
@@ -32,10 +39,11 @@ class Loging
     static void Register()
     {
         Console.WriteLine("\n--- Register ---");
+        Console.WriteLine("You can use dot (.) to toggle between showing and hiding the password.");
         Console.Write("Enter username: ");
         string username = Console.ReadLine();
         Console.Write("Enter password: ");
-        string password = Console.ReadLine();
+        string password = ReadMaskedPassword();
 
         // Check if the user already exists
         if (UserExists(username))
@@ -44,11 +52,11 @@ class Loging
             return;
         }
 
-        // Store user credentials in a text file
-        using (StreamWriter sw = File.AppendText("users.txt"))
-        {
-            sw.WriteLine(username + "," + password);
-        }
+        // Zaszyfruj hasło 
+        string encryptedPassword = EncryptPassword(password);
+
+        // przechowanie danych użytkownika w słowniku <dictionary>
+        users.Add(username, encryptedPassword);
 
         Console.WriteLine("Registration successful. You can now login.");
     }
@@ -56,10 +64,11 @@ class Loging
     static void Login()
     {
         Console.WriteLine("\n--- Login ---");
+        Console.WriteLine("You can use dot (.) to toggle between showing and hiding the password.");
         Console.Write("Enter username: ");
         string username = Console.ReadLine();
         Console.Write("Enter password: ");
-        string password = Console.ReadLine();
+        string password = ReadMaskedPassword();
 
         // Check if the user exists
         if (!UserExists(username))
@@ -68,8 +77,11 @@ class Loging
             return;
         }
 
-        // Validate user credentials
-        if (ValidateCredentials(username, password))
+        // zaszyfruj dla porównania
+        string encryptedPassword = EncryptPassword(password);
+
+        // walidacja użytkownika
+        if (ValidateCredentials(username, encryptedPassword))
         {
             Console.WriteLine("Welcome, " + username + "!");
             Console.Title = $"Twoja Biblioteka - {username}";
@@ -82,29 +94,74 @@ class Loging
 
     static bool UserExists(string username)
     {
-        string[] lines = File.ReadAllLines("users.txt");
-        foreach (string line in lines)
+        return users.ContainsKey(username);
+    }
+
+    static bool ValidateCredentials(string username, string encryptedPassword)
+    {
+        if (users.TryGetValue(username, out string password))
         {
-            string[] parts = line.Split(',');
-            if (parts.Length >= 2 && parts[0] == username)
-            {
-                return true;
-            }
+            return password == encryptedPassword;
         }
         return false;
     }
 
-    static bool ValidateCredentials(string username, string password)
+    static string EncryptPassword(string password)
     {
-        string[] lines = File.ReadAllLines("users.txt");
-        foreach (string line in lines)
+        using (MD5 md5 = MD5.Create())
         {
-            string[] parts = line.Split(',');
-            if (parts.Length >= 2 && parts[0] == username && parts[1] == password)
+            byte[] hash = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
             {
-                return true;
+                sb.Append(hash[i].ToString("X2"));
             }
+            return sb.ToString();
         }
-        return false;
+    }
+
+    static string ReadMaskedPassword()
+    {
+        StringBuilder passwordBuilder = new StringBuilder();
+        ConsoleKeyInfo keyInfo;
+        bool isMasked = true;
+
+        do
+        {
+            keyInfo = Console.ReadKey(true);
+
+            // Toggle between showing the masked password and hiding it when the "." (dot) key is pressed
+            if (keyInfo.KeyChar == '.')
+            {
+                isMasked = !isMasked;
+                continue;
+            }
+
+            if (keyInfo.Key == ConsoleKey.Enter)
+            {
+                Console.WriteLine();
+                break;
+            }
+
+            if (keyInfo.Key == ConsoleKey.Backspace && passwordBuilder.Length > 0)
+            {
+                passwordBuilder.Remove(passwordBuilder.Length - 1, 1);
+                Console.Write("\b \b");
+            }
+            else if (!char.IsControl(keyInfo.KeyChar))
+            {
+                if (isMasked)
+                {
+                    passwordBuilder.Append(keyInfo.KeyChar);
+                    Console.Write("*");
+                }
+                else
+                {
+                    Console.Write(keyInfo.KeyChar);
+                }
+            }
+        } while (true);
+
+        return passwordBuilder.ToString();
     }
 }
