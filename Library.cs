@@ -42,7 +42,7 @@ namespace Bibiotekav2
         {
             foreach (Book book in booksList)
             {
-                Console.WriteLine($"{book.Title} {book.Author}");
+                Console.WriteLine($"{book.Title} {" | "} {book.Author}");
             }
         }
         public static void ShowAuthors()

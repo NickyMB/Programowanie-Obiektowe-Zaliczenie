@@ -8,7 +8,6 @@ using System.Security.Cryptography; // ad1
 class Loging
 {
     private static Dictionary<string, string> users = new Dictionary<string, string>();
-
     public static void LoginNav()
     {
         Console.WriteLine("Witamy w panelu Logowania/Rejestracji!");
@@ -38,7 +37,7 @@ class Loging
 
     static void Register()
     {
-        Console.WriteLine("\n--- Register ---");
+        Console.WriteLine("\n--- Rejestracja ---");
         Console.WriteLine("You can use dot (.) to toggle between showing and hiding the password.");
         Console.Write("Enter username: ");
         string username = Console.ReadLine();

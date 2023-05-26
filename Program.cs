@@ -7,19 +7,10 @@ namespace Bibiotekav2
         {
             Console.Title = "Twoja Biblioteka";
             Console.Clear();
+            Fetches.Fetch();
             Library.ReadFromFile();
-
-            List<int> borowersNumber = new List<int>();
-            borowersNumber.Add(500);
-            {
-                int borowerNumber = Borrower.GenerateBorrowerNumber();
-                borowersNumber.Add(borowerNumber);
-                //Console.WriteLine("Generated number is : " + borowerNumber);
-                Loging.LoginNav();
-                Console.ReadKey();
-            }
+            Loging.LoginNav();
         }
-
     }
 }
 

@@ -1,0 +1,6 @@
+Szukanie po pozostałych wartościach
+Admin panel (dodawanie książek, usuwanie książek, sprawdź listę użytkowników i jego książki)
+Wyporzyczanie książek(id książki, id użytkownika)
+Oddawanie książek
+Czy na pewno chcesz wyjść
+Raport
