@@ -42,45 +42,6 @@ namespace Bibiotekav2
         }
         public static void ReadFromFile()
         {
-            /* string filePath = "books.txt";
-             try
-             {
-                 string fileContent = File.ReadAllText(filePath);
-                 string[] lines = fileContent.Split(Environment.NewLine);
-                 foreach (string line in lines)
-                 {
-                     string[] elements = line.Split(';');
-
-                     Book book = new Book(elements[0].Trim(), elements[1].Trim(), Convert.ToDouble(elements[2].Trim()), elements[3].Trim(), Convert.ToInt32(elements[4].Trim()), elements[5].Trim(), Convert.ToBoolean(elements[6].Trim()));
-
-                 }
-             }
-             catch (IOException e)
-             {
-                 Console.WriteLine("Błąd odczytu pliku: " + e.Message);
-             }
-             /*  string filePath = "books.txt";
-              try
-              {
-                  using (StreamReader reader = new StreamReader(filePath))
-                  {
-                      string line;
-                      while ((line = reader.ReadLine()) != null)
-                      {
-                          string[] elements = line.Split(';');
-
-
-                          Book book = new Book(elements[0].Trim(), elements[1].Trim(), Convert.ToInt32(elements[2].Trim()), elements[3].Trim(), Convert.ToInt32(elements[4].Trim()), elements[5].Trim(), Convert.ToBoolean(elements[6].Trim()));
-                          booksList.Add(book);
-
-                      }
-                  }
-              }
-              catch (IOException e)
-              {
-                  Console.WriteLine("Błąd odczytu pliku: " + e.Message);
-              } */
-
             string filePath = "books.txt";
             try
             {
