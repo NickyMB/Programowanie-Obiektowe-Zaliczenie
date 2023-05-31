@@ -13,8 +13,10 @@ namespace Bibiotekav2
         {
             while (true)
             {
-                // Box.Border(Navigate.Books);
-                Box.Border(Navigate.Books_Admin);
+                if (Loging.IsAdminLogged == true)
+                    Box.Border(Navigate.Books_Admin);
+                else
+                    Box.Border(Navigate.Books);
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 switch (keyInfo.Key)
@@ -23,7 +25,6 @@ namespace Bibiotekav2
                         ShowLibrary();
                         break;
                     case ConsoleKey.D2:
-                        text;
                         ShowAuthors();
                         break;
                     case ConsoleKey.D3:
@@ -33,14 +34,28 @@ namespace Bibiotekav2
                         SearchBookbByAuthor();
                         break;
                     case ConsoleKey.D5:
-                        ShowUnavailable();
-                        break;
-                    case ConsoleKey.D6:
-                        /* if (== admim)
+                        if (Loging.IsAdminLogged == true)
+                        {
                             ShowUnavailable();
+                            break;
+                        }
                         else
-                            continue; */
-                        break;
+                        {
+                            BooksActions.ShowMyBooks();
+                            break;
+                        }
+
+                    case ConsoleKey.D6:
+                        if (Loging.IsAdminLogged == true)
+                        {
+                            ShowLastReturns();
+                            break;
+                        }
+                        else
+                        {
+                            BooksActions.PassMyBooks();
+                            break;
+                        }
                     case ConsoleKey.Q:
                         Navigate.Navigation();
                         break;
@@ -56,7 +71,7 @@ namespace Bibiotekav2
             {
                 if (book.Available == true)
                 {
-                    Console.WriteLine($"{book.Title} {" | "} {book.Author}");
+                    Console.WriteLine($"{book.NumberID} {" | "} {book.Title} {" | "} {book.Author}");
                 }
             }
         }
@@ -83,8 +98,15 @@ namespace Bibiotekav2
             {
                 if (book.Available == false)
                 {
-                    Console.WriteLine($"{book.Title} {" | "} {book.Author}");
+                    Console.WriteLine($"{book.Title} {" | "} {book.Borrower} {" | "} {book.Borrow_date}");
                 }
+            }
+        }
+        public static void ShowLastReturns()
+        {
+            foreach (var book in Library.booksList.Where(x => x.Borrower != null))
+            {
+                Console.WriteLine($"{book.Title} {" | "} {book.Borrower} {" | "} {book.Borrow_date} {" | "} {book.Return_date}");
             }
         }
         public static void SearchBookbByTitle()
@@ -108,7 +130,7 @@ namespace Bibiotekav2
             foreach (Book book in matchingBooks)
             {
                 if (book.Available == true)
-                    Console.WriteLine($"\n{book.Title} {" | "} {book.Author}");
+                    Console.WriteLine($"\n{book.NumberID} {" | "}  {book.Title} {" | "} {book.Author}");
                 else
                     continue;
             }
@@ -133,12 +155,13 @@ namespace Bibiotekav2
             {
                 if (book.Available == true)
                 {
-                    Console.WriteLine($"\n{book.Title} {" | "} {book.Author}");
+                    Console.WriteLine($"\n{book.NumberID} {" | "}  {book.Title} {" | "} {book.Author}");
                 }
             }
         }
         public static void ReadFromFile()
         {
+            int number = 0;
             string filePath = "books.txt";
             try
             {
@@ -151,6 +174,7 @@ namespace Bibiotekav2
 
                     if (elements.Length == 7)
                     {
+                        number = booksList.Count + 1;
                         string title = elements[0].Trim();
                         string author = elements[1].Trim();
                         string isbnNumber = Convert.ToString(elements[2].Trim());
@@ -159,7 +183,7 @@ namespace Bibiotekav2
                         string category = elements[5].Trim();
                         bool available = Convert.ToBoolean(elements[6].Trim());
 
-                        Book book = new Book(title, author, isbnNumber, publisher, publicationYear, category, available);
+                        Book book = new Book(number, title, author, isbnNumber, publisher, publicationYear, category, available);
                         booksList.Add(book);
                     }
                     else

@@ -121,3 +121,4 @@ The Hunt for Red October;Tom Clancy;9788375540316;Albatros;1984-07-01;thriller;t
 Patriot Games;Tom Clancy;9788375540317;Albatros;1987-07-01;thriller;true
 Executive Orders;Tom Clancy;9788375540318;Albatros;1996-07-01;thriller;true
 The Cardinal of the Kremlin;Tom Clancy;9788375540319;Albatros;1988-07-01;thriller;true
+The Cardinal of the Kremlin;Tom Clancy;9788375540319;Albatros;1988-07-01;thriller;false

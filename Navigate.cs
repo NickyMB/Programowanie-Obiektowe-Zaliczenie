@@ -9,15 +9,22 @@ namespace Bibiotekav2
     internal class Navigate
     {
         //Nawigacje:
-        public static string[] MainNav = { "1 - Pokaż Menu", "2 - Zaloguj się", "3 - Pokaż książki", "4 - Wypożycz książki", "5 - Menu item5", "Q - Wyjście" };
+        public static string[] MainNav = { "1 - Zaloguj się", "2 - Pokaż książki", "3 - Wypożycz książki", "Q - Wyjście" };
+        public static string[] Main_Admin = { "1 - Zaloguj się", "2 - Pokaż książki", "Q - Wyjście" };
         public static string[] Login = { "1 - Rejestracja", "2 - Logowanie", "Q - Wyjście" };
-        public static string[] Books = { "1 - Lista książek", "2 - Lista autorów", "3 - Wyszukaj książkę po tytule", "4 - Wyszukaj książkę po autorze", "Q - Wyjście" };
-        public static string[] Books_Admin = { "1 - Lista książek", "2 - Lista autorów", "3 - Wyszukaj książkę po tytule", "4 - Wyszukaj książkę po autorze", "5 - Pokaż niedostępne książki", "Q - Wyjście" };
+        public static string[] Books = { "1 - Lista książek", "2 - Lista autorów", "3 - Wyszukaj książkę po tytule", "4 - Wyszukaj książkę po autorze", "5 - Moje książki", "6 - Oddaj książki", "Q - Wyjście" };
+        public static string[] Books_Admin = { "1 - Lista książek", "2 - Lista autorów", "3 - Wyszukaj książkę po tytule", "4 - Wyszukaj książkę po autorze", "5 - Pokaż niedostępne książki", "6 - Pokaż ostatnio oddane książki", "Q - Wyjście" };
 
         public static void Navigation()
         {
             Console.Clear();
-            Box.Border(Navigate.MainNav);
+
+
+            if (Loging.IsAdminLogged == true)
+                Box.Border(Navigate.Main_Admin);
+            else
+                Box.Border(Navigate.MainNav);
+
             while (true)
             {
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true); // Odczytaj wciśnięty klawisz
@@ -25,22 +32,30 @@ namespace Bibiotekav2
                 {
                     case ConsoleKey.D1:
                         Console.Clear();
-                        Box.Border(Navigate.MainNav);
+                        Loging.LoginNav();
                         break;
                     case ConsoleKey.D2:
                         Console.Clear();
-                        Loging.LoginNav();
-                        break;
-                    case ConsoleKey.D3:
-                        Console.Clear();
                         Library.Start();
                         break;
+                    case ConsoleKey.D3:
+                        if (Loging.IsAdminLogged == true)
+                        {
+                            Console.WriteLine("Ups! Spróbuj ponownie z większą precyzją :)");
+                            break;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            BooksActions.BorrowBooks();
+                            break;
+                        }
                     case ConsoleKey.Q:
                         Console.Clear();
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Niewłaściwy wybór, wybierz ponownie");
+                        Console.WriteLine("Ups! Spróbuj ponownie z większą precyzją :)");
                         break;
                 }
             }

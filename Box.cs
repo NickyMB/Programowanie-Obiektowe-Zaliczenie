@@ -34,7 +34,7 @@ namespace Bibiotekav2
             foreach (string line in names)
             {
 
-                if (line == "Q - Exit")
+                if (line == "Q - Wyjście")
                 {
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write(KPI);

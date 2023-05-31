@@ -8,6 +8,7 @@ namespace Bibiotekav2
 {   // class containing objects for books
     internal class Book
     {
+        public int NumberID { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public string ISBN_number { get; set; }
@@ -19,8 +20,9 @@ namespace Bibiotekav2
         public DateTime Borrow_date { get; set; }
         public DateTime Return_date { get; set; }
 
-        public Book(string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available)
+        public Book(int numberID, string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available)
         {
+            NumberID = numberID;
             Title = title;
             Author = author;
             ISBN_number = isbn_number;
@@ -29,8 +31,22 @@ namespace Bibiotekav2
             Category = category;
             Available = available;
         }
-        public Book(string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available, string borrower, DateTime borrow_date, DateTime return_date)
+        public Book(int numberID, string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available, string borrower, DateTime borrow_date)
         {
+            NumberID = numberID;
+            Title = title;
+            Author = author;
+            ISBN_number = isbn_number;
+            Publisher = publisher;
+            Publication_year = publication_year;
+            Category = category;
+            Available = available;
+            Borrower = borrower;
+            Borrow_date = borrow_date;
+        }
+        public Book(int numberID, string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available, string borrower, DateTime borrow_date, DateTime return_date)
+        {
+            NumberID = numberID;
             Title = title;
             Author = author;
             ISBN_number = isbn_number;

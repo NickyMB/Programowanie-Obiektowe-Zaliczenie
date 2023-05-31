@@ -9,6 +9,9 @@ class Loging
 {
     private static Dictionary<string, string> users = new Dictionary<string, string>();
     public static bool IsUserLogged = false;
+    public static bool IsAdminLogged = false;
+    public static string username;
+
 
     // Admin credentials
     private const string AdminUsername = "admin";
@@ -47,66 +50,68 @@ class Loging
     static void Register()
     {
         Console.WriteLine("\n--- Rejestracja ---");
-        Console.WriteLine("Użyj kropki (.) jeśli chcesz ukryć lub pokazać hasło.");
+        Console.WriteLine("Odkryj magię kropki (.) i zakryj prawdziwe hasło!");
         Console.Write("Nazwa użytkownika: ");
         string username = Console.ReadLine();
         Console.Write("Hasło: ");
         string password = ReadMaskedPassword();
 
-        // Check if the user already exists
+        // Sprawdź, czy użytkownik już istnieje
         if (UserExists(username))
         {
-            Console.WriteLine("Użytkownik o podanej nazwie już istnieje. Spróbuj innej nazwy.");
+            Console.WriteLine("Wygląda na to, że masz konkurencję! Spróbuj innej nazwy.");
             return;
         }
 
         // Zaszyfruj hasło 
         string encryptedPassword = EncryptPassword(password);
 
-        // przechowanie danych użytkownika w słowniku <dictionary>
+        // Przechowanie danych użytkownika w słowniku <dictionary>
         users.Add(username, encryptedPassword);
 
-        Console.WriteLine("Rejestracja przebiegła pomyślnie. Zaloguj się.");
+        Console.WriteLine("Sukces! Możesz teraz zalogować się i zacząć eksplorować Nasze biblioteczne bezkresy.");
     }
 
     static void Login()
     {
         Console.WriteLine("\n--- Logowanie ---");
-        Console.WriteLine("Użyj kropki (.) jeśli chcesz ukryć lub pokazać hasło.");
+        Console.WriteLine("Odkryj magię kropki (.) i zakryj prawdziwe hasło!");
         Console.Write("Nazwa użytkownika: ");
-        string username = Console.ReadLine();
+        username = Console.ReadLine();
         Console.Write("Hasło: ");
         string password = ReadMaskedPassword();
 
         if (username == AdminUsername && password == AdminPassword)
         {
             Console.WriteLine("Witaj, " + username + "!");
-            IsUserLogged = true;
+            IsUserLogged = false;
+            IsAdminLogged = true;
             Console.Title = $"Twoja Biblioteka - {username}";
             Navigate.Navigation();
         }
-        // Check if the user exists
+        // Sprawdź, czy użytkownik istnieje
         if (!UserExists(username))
         {
-            Console.WriteLine("Użytkownik o podanej nazwie nie istnieje. Zarejestruj się.");
+            Console.WriteLine("O nie! Wprowadziłeś nazwę użytkownika, która istnieje tylko w alternatywnej rzeczywistości. Czy jesteś gotowy, aby odkryć nową rzeczywistość poprzez rejestrację? ");
             return;
         }
 
-        // zaszyfruj dla porównania
+        // Zaszyfruj hasło do porównania
         string encryptedPassword = EncryptPassword(password);
 
-        // walidacja użytkownika
-        if (ValidateCredentials(username, encryptedPassword))
+        // Walidacja użytkownika
+        if (ValidateCredentials(username, encryptedPassword) && IsAdminLogged == false)
         {
             Console.WriteLine("Witaj, " + username + "!");
             IsUserLogged = true;
+            IsAdminLogged = false;
             Console.Title = $"Twoja Biblioteka - {username}";
 
             Navigate.Navigation();
         }
         else
         {
-            Console.WriteLine("Niewłaściwe dane logowania. Spróbuj ponownie.");
+            Console.WriteLine("Huston, mamy problem! Twoje dane logowania nie przeszły testu kosmicznego. Spróbuj ponownie");
         }
     }
 
@@ -152,6 +157,9 @@ class Loging
             if (keyInfo.KeyChar == '.')
             {
                 isMasked = !isMasked;
+                Console.SetCursorPosition(Console.CursorLeft - passwordBuilder.Length, Console.CursorTop);
+                Console.Write(isMasked ? new string('*', passwordBuilder.Length) : passwordBuilder.ToString());
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                 continue;
             }
 
@@ -168,18 +176,13 @@ class Loging
             }
             else if (!char.IsControl(keyInfo.KeyChar))
             {
-                if (isMasked)
-                {
-                    passwordBuilder.Append(keyInfo.KeyChar);
-                    Console.Write("*");
-                }
-                else
-                {
-                    Console.Write(keyInfo.KeyChar);
-                }
+                passwordBuilder.Append(keyInfo.KeyChar);
+                Console.Write(isMasked ? "*" : keyInfo.KeyChar.ToString());
             }
         } while (true);
 
         return passwordBuilder.ToString();
     }
+
+
 }
