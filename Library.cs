@@ -23,6 +23,7 @@ namespace Bibiotekav2
                         ShowLibrary();
                         break;
                     case ConsoleKey.D2:
+                        text;
                         ShowAuthors();
                         break;
                     case ConsoleKey.D3:
