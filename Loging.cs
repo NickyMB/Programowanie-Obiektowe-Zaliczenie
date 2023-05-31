@@ -8,6 +8,12 @@ using System.Security.Cryptography; // ad1
 class Loging
 {
     private static Dictionary<string, string> users = new Dictionary<string, string>();
+    public static bool IsUserLogged = false;
+
+    // Admin credentials
+    private const string AdminUsername = "admin";
+    private const string AdminPassword = "admin";
+
     public static void LoginNav()
     {
         Console.WriteLine("Witamy w panelu Logowania/Rejestracji!");
@@ -26,7 +32,10 @@ class Loging
                     Login();
                     break;
                 case ConsoleKey.Q:
-                    Environment.Exit(0);
+                    if (IsUserLogged == true)
+                        Navigate.Navigation();
+                    else
+                        Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine("Niewłaściwy wybór, wybierz ponownie");
@@ -38,16 +47,16 @@ class Loging
     static void Register()
     {
         Console.WriteLine("\n--- Rejestracja ---");
-        Console.WriteLine("You can use dot (.) to toggle between showing and hiding the password.");
-        Console.Write("Enter username: ");
+        Console.WriteLine("Użyj kropki (.) jeśli chcesz ukryć lub pokazać hasło.");
+        Console.Write("Nazwa użytkownika: ");
         string username = Console.ReadLine();
-        Console.Write("Enter password: ");
+        Console.Write("Hasło: ");
         string password = ReadMaskedPassword();
 
         // Check if the user already exists
         if (UserExists(username))
         {
-            Console.WriteLine("User already exists. Please try again with a different username.");
+            Console.WriteLine("Użytkownik o podanej nazwie już istnieje. Spróbuj innej nazwy.");
             return;
         }
 
@@ -57,22 +66,29 @@ class Loging
         // przechowanie danych użytkownika w słowniku <dictionary>
         users.Add(username, encryptedPassword);
 
-        Console.WriteLine("Registration successful. You can now login.");
+        Console.WriteLine("Rejestracja przebiegła pomyślnie. Zaloguj się.");
     }
 
     static void Login()
     {
-        Console.WriteLine("\n--- Login ---");
-        Console.WriteLine("You can use dot (.) to toggle between showing and hiding the password.");
-        Console.Write("Enter username: ");
+        Console.WriteLine("\n--- Logowanie ---");
+        Console.WriteLine("Użyj kropki (.) jeśli chcesz ukryć lub pokazać hasło.");
+        Console.Write("Nazwa użytkownika: ");
         string username = Console.ReadLine();
-        Console.Write("Enter password: ");
+        Console.Write("Hasło: ");
         string password = ReadMaskedPassword();
 
+        if (username == AdminUsername && password == AdminPassword)
+        {
+            Console.WriteLine("Witaj, " + username + "!");
+            IsUserLogged = true;
+            Console.Title = $"Twoja Biblioteka - {username}";
+            Navigate.Navigation();
+        }
         // Check if the user exists
         if (!UserExists(username))
         {
-            Console.WriteLine("User does not exist. Please register first.");
+            Console.WriteLine("Użytkownik o podanej nazwie nie istnieje. Zarejestruj się.");
             return;
         }
 
@@ -82,14 +98,15 @@ class Loging
         // walidacja użytkownika
         if (ValidateCredentials(username, encryptedPassword))
         {
-            Console.WriteLine("Welcome, " + username + "!");
+            Console.WriteLine("Witaj, " + username + "!");
+            IsUserLogged = true;
             Console.Title = $"Twoja Biblioteka - {username}";
 
             Navigate.Navigation();
         }
         else
         {
-            Console.WriteLine("Incorrect credentials. Please try again.");
+            Console.WriteLine("Niewłaściwe dane logowania. Spróbuj ponownie.");
         }
     }
 

@@ -11,7 +11,7 @@ namespace Bibiotekav2
     {
         public static void Fetch()
         {
-            string url = "https://gist.githubusercontent.com/NickyMB/b26c256dcebbeef8f881f37111682899/raw/98ea7a29383324e89e72a5483f1a5bdc97418fa2/books.txt";
+            string url = "https://gist.githubusercontent.com/NickyMB/b26c256dcebbeef8f881f37111682899/raw/1fa0c2ffa755d6711136b0f5176d6b73890161f5/books.txt";
             string filePath = "books.txt";
 
             try
@@ -20,12 +20,12 @@ namespace Bibiotekav2
                 {
                     string data = client.DownloadString(url);
                     File.WriteAllText(filePath, data);
-                    Console.WriteLine("Data fetched and saved successfully.");
+                    // Console.WriteLine("Data fetched and saved successfully.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.WriteLine($"Wystąpił błąd: {ex.Message}");
             }
         }
     }

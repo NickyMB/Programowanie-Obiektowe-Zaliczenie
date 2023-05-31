@@ -13,7 +13,9 @@ namespace Bibiotekav2
         {
             while (true)
             {
-                Box.Border(Navigate.Books);
+                // Box.Border(Navigate.Books);
+                Box.Border(Navigate.Books_Admin);
+
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 switch (keyInfo.Key)
                 {
@@ -29,6 +31,15 @@ namespace Bibiotekav2
                     case ConsoleKey.D4:
                         SearchBookbByAuthor();
                         break;
+                    case ConsoleKey.D5:
+                        ShowUnavailable();
+                        break;
+                    case ConsoleKey.D6:
+                        /* if (== admim)
+                            ShowUnavailable();
+                        else
+                            continue; */
+                        break;
                     case ConsoleKey.Q:
                         Navigate.Navigation();
                         break;
@@ -42,7 +53,10 @@ namespace Bibiotekav2
         {
             foreach (Book book in booksList)
             {
-                Console.WriteLine($"{book.Title} {" | "} {book.Author}");
+                if (book.Available == true)
+                {
+                    Console.WriteLine($"{book.Title} {" | "} {book.Author}");
+                }
             }
         }
         public static void ShowAuthors()
@@ -51,7 +65,10 @@ namespace Bibiotekav2
 
             foreach (var book in booksList)
             {
-                uniqueAuthors.Add(book.Author);
+                if (book.Available == true)
+                {
+                    uniqueAuthors.Add(book.Author);
+                }
             }
 
             foreach (var author in uniqueAuthors)
@@ -59,14 +76,24 @@ namespace Bibiotekav2
                 Console.WriteLine(author);
             }
         }
+        public static void ShowUnavailable()
+        {
+            foreach (Book book in booksList)
+            {
+                if (book.Available == false)
+                {
+                    Console.WriteLine($"{book.Title} {" | "} {book.Author}");
+                }
+            }
+        }
         public static void SearchBookbByTitle()
         {
             List<Book> matchingBooks = new List<Book>();
-            Console.WriteLine("Podaj nazwę książki do wyszukania:");
+            Console.WriteLine("Podaj tytuł szukanej książki:");
             string searchName = Console.ReadLine();
             do
             {
-                Console.WriteLine("Prosze Podaj nazwę książki do wyszukania:");
+                Console.WriteLine("Podaj tytuł szukanej książki:");
                 searchName = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(searchName))
@@ -79,17 +106,19 @@ namespace Bibiotekav2
             } while (string.IsNullOrEmpty(searchName));
             foreach (Book book in matchingBooks)
             {
-                Console.WriteLine($"\n{book.Title} {" | "} {book.Author}");
+                if (book.Available == true)
+                    Console.WriteLine($"\n{book.Title} {" | "} {book.Author}");
+                else
+                    continue;
             }
         }
         public static void SearchBookbByAuthor()
         {
             List<Book> matchingBooks = new List<Book>();
-            Console.WriteLine("Podaj imię autora do wyszukania:");
-            string searchName = Console.ReadLine();
+            string searchName;
             do
             {
-                Console.WriteLine("Prosze Podaj imię autora do wyszukania:");
+                Console.WriteLine("Podaj imię autora do wyszukania:");
                 searchName = Console.ReadLine();
                 if (string.IsNullOrEmpty(searchName))
                 {
@@ -101,7 +130,10 @@ namespace Bibiotekav2
             } while (string.IsNullOrEmpty(searchName));
             foreach (Book book in matchingBooks)
             {
-                Console.WriteLine($"\n{book.Title} {" | "} {book.Author}");
+                if (book.Available == true)
+                {
+                    Console.WriteLine($"\n{book.Title} {" | "} {book.Author}");
+                }
             }
         }
         public static void ReadFromFile()
@@ -131,13 +163,13 @@ namespace Bibiotekav2
                     }
                     else
                     {
-                        Console.WriteLine("Invalid line format: " + line);
+                        Console.WriteLine("Niepoprawny format: " + line);
                     }
                 }
             }
             catch (IOException e)
             {
-                Console.WriteLine("Error reading file: " + e.Message);
+                Console.WriteLine("Błąd czytania pliku: " + e.Message);
             }
         }
     }

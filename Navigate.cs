@@ -9,9 +9,10 @@ namespace Bibiotekav2
     internal class Navigate
     {
         //Nawigacje:
-        public static string[] MainNav = { "1 - Pokaż Menu", "2 - Zaloguj się", "3 - Pokaż książki", "4 - Menu item4", "5 - Menu item5", "Q - Exit" };
-        public static string[] Login = { "1 - Register", "2 - Login", "Q - Exit" };
-        public static string[] Books = { "1 - Pokaż książki", "2 - Pokaż autorów", "3 - Wyszukaj książkę po tytule", "4 - Wyszukaj książkę po autorze", "Q - Exit" };
+        public static string[] MainNav = { "1 - Pokaż Menu", "2 - Zaloguj się", "3 - Pokaż książki", "4 - Wypożycz książki", "5 - Menu item5", "Q - Wyjście" };
+        public static string[] Login = { "1 - Rejestracja", "2 - Logowanie", "Q - Wyjście" };
+        public static string[] Books = { "1 - Lista książek", "2 - Lista autorów", "3 - Wyszukaj książkę po tytule", "4 - Wyszukaj książkę po autorze", "Q - Wyjście" };
+        public static string[] Books_Admin = { "1 - Lista książek", "2 - Lista autorów", "3 - Wyszukaj książkę po tytule", "4 - Wyszukaj książkę po autorze", "5 - Pokaż niedostępne książki", "Q - Wyjście" };
 
         public static void Navigation()
         {

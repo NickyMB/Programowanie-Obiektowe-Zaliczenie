@@ -15,11 +15,11 @@ namespace Bibiotekav2
         public string Publication_year { get; set; }
         public string Category { get; set; }
         public bool Available { get; set; }
-        /*  public string Borrower { get; set; }
-         public DateTime Borrow_date { get; set; }
-         public DateTime Return_date { get; set; } */
+        public string Borrower { get; set; }
+        public DateTime Borrow_date { get; set; }
+        public DateTime Return_date { get; set; }
 
-        public Book(string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available/*,  string borrower, DateTime borrow_date, DateTime return_date */)
+        public Book(string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available)
         {
             Title = title;
             Author = author;
@@ -28,9 +28,19 @@ namespace Bibiotekav2
             Publication_year = publication_year;
             Category = category;
             Available = available;
-            /*   Borrower = borrower;
-              Borrow_date = borrow_date;
-              Return_date = return_date; */
+        }
+        public Book(string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available, string borrower, DateTime borrow_date, DateTime return_date)
+        {
+            Title = title;
+            Author = author;
+            ISBN_number = isbn_number;
+            Publisher = publisher;
+            Publication_year = publication_year;
+            Category = category;
+            Available = available;
+            Borrower = borrower;
+            Borrow_date = borrow_date;
+            Return_date = return_date;
         }
     }
     // class containing objects of information about the borrower
