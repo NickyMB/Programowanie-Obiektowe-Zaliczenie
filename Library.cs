@@ -31,15 +31,18 @@ namespace Bibiotekav2
                         ShowCategories();
                         break;
                     case ConsoleKey.D4:
-                        SearchBookbByTitle();
+                        SearchBookbByISBN();
                         break;
                     case ConsoleKey.D5:
-                        SearchBookbByAuthor();
+                        SearchBookbByTitle();
                         break;
                     case ConsoleKey.D6:
-                        SearchBookbByCategory();
+                        SearchBookbByAuthor();
                         break;
                     case ConsoleKey.D7:
+                        SearchBookbByCategory();
+                        break;
+                    case ConsoleKey.D8:
                         if (Loging.IsAdminLogged == true)
                         {
                             ShowUnavailable();
@@ -51,7 +54,7 @@ namespace Bibiotekav2
                             break;
                         }
 
-                    case ConsoleKey.D8:
+                    case ConsoleKey.D9:
                         if (Loging.IsAdminLogged == true)
                         {
                             ShowLastReturns();
@@ -59,7 +62,7 @@ namespace Bibiotekav2
                         }
                         else
                         {
-                            BooksActions.PassMyBooks();
+                            BooksActions.ReturnMyBooks();
                             break;
                         }
                     case ConsoleKey.Q:
@@ -79,6 +82,31 @@ namespace Bibiotekav2
                 {
                     Console.WriteLine($"{book.NumberID} {" | "} {book.Title} {" | "} {book.Author}");
                 }
+            }
+        }
+        public static void SearchBookbByISBN()
+        {
+            List<Book> matchingBooks = new List<Book>();
+            string searchISBN = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Podaj numer ISBN szukanej książki:");
+                searchISBN = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(searchISBN))
+                {
+                }
+                else
+                {
+                    matchingBooks = booksList.Where(book => book.Title.IndexOf(searchISBN, StringComparison.CurrentCultureIgnoreCase) >= 0).ToList();
+                }
+            } while (string.IsNullOrEmpty(searchISBN));
+            foreach (Book book in matchingBooks)
+            {
+                if (book.Available == true)
+                    Console.WriteLine($"\n{book.NumberID} {" | "}  {book.ISBN_number}  {" | "}  {book.Title} {" | "} {book.Author}");
+                else
+                    continue;
             }
         }
         public static void ShowCategories()
@@ -127,7 +155,7 @@ namespace Bibiotekav2
         }
         public static void ShowLastReturns()
         {
-            foreach (var book in Library.booksList.Where(x => x.Borrower != null))
+            foreach (var book in Library.booksList.Where(x => x.Return_date != DateTime.Parse("01-01-0001 00:00:00")))
             {
                 Console.WriteLine($"{book.Title} {" | "} {book.Borrower} {" | "} {book.Borrow_date} {" | "} {book.Return_date}");
             }
@@ -135,7 +163,6 @@ namespace Bibiotekav2
         public static void SearchBookbByTitle()
         {
             List<Book> matchingBooks = new List<Book>();
-            Console.WriteLine("Podaj tytuł szukanej książki:");
             string searchName = Console.ReadLine();
             do
             {
@@ -160,8 +187,19 @@ namespace Bibiotekav2
         }
         public static void SearchBookbByCategory()
         {
-            Console.WriteLine("Podaj nazwę kategorii");
-            string category= Console.ReadLine();
+            bool check = true;
+            string category;
+            do
+            {
+                Console.WriteLine("Podaj nazwę kategorii:");
+                category = Console.ReadLine();
+                if (category != "")
+                {
+                    check = false;
+                }
+
+            } while (check);
+
             foreach (var book in Library.booksList.Where(x => x.Category == category))
             {
                 Console.WriteLine($"{book.NumberID} {book.Title}");
@@ -173,8 +211,18 @@ namespace Bibiotekav2
             string searchName;
             do
             {
-                Console.WriteLine("Podaj imię autora do wyszukania:");
-                searchName = Console.ReadLine();
+                bool check = true;
+                do
+                {
+                    Console.WriteLine("Podaj imię autora do wyszukania:");
+                    searchName = Console.ReadLine();
+                    if (searchName != "")
+                    {
+                        check = false;
+                    }
+
+                } while (check);
+
                 if (string.IsNullOrEmpty(searchName))
                 {
                 }
@@ -220,7 +268,7 @@ namespace Bibiotekav2
                     }
                     else
                     {
-                        Console.WriteLine("Niepoprawny format: " + line);
+                        //Console.WriteLine("Niepoprawny format: " + line);
                     }
                 }
             }

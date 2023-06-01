@@ -38,7 +38,7 @@ namespace Bibiotekav2
                 Console.WriteLine($"{book.Title} {" Data wyporzyczenia: "} {book.Borrow_date}");
             }
         }
-        public static void PassMyBooks()
+        public static void ReturnMyBooks()
         {
             foreach (var book in Library.booksList.Where(x => x.Borrower == Loging.username))
             {
