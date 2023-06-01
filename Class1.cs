@@ -9,12 +9,12 @@ namespace Bibiotekav2
     internal class Book
     {
         public int NumberID { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
+        public string Title { get; set; } //Jest szukanie i wyświetlanie
+        public string Author { get; set; } //Jest szukanie i wyświetlanie
         public string ISBN_number { get; set; }
         public string Publisher { get; set; }
         public string Publication_year { get; set; }
-        public string Category { get; set; }
+        public string Category { get; set; } //Jest szukanie i wyświetlanie
         public bool Available { get; set; }
         public string Borrower { get; set; }
         public DateTime Borrow_date { get; set; }

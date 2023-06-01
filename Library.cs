@@ -28,12 +28,18 @@ namespace Bibiotekav2
                         ShowAuthors();
                         break;
                     case ConsoleKey.D3:
-                        SearchBookbByTitle();
+                        ShowCategories();
                         break;
                     case ConsoleKey.D4:
-                        SearchBookbByAuthor();
+                        SearchBookbByTitle();
                         break;
                     case ConsoleKey.D5:
+                        SearchBookbByAuthor();
+                        break;
+                    case ConsoleKey.D6:
+                        SearchBookbByCategory();
+                        break;
+                    case ConsoleKey.D7:
                         if (Loging.IsAdminLogged == true)
                         {
                             ShowUnavailable();
@@ -45,7 +51,7 @@ namespace Bibiotekav2
                             break;
                         }
 
-                    case ConsoleKey.D6:
+                    case ConsoleKey.D8:
                         if (Loging.IsAdminLogged == true)
                         {
                             ShowLastReturns();
@@ -73,6 +79,23 @@ namespace Bibiotekav2
                 {
                     Console.WriteLine($"{book.NumberID} {" | "} {book.Title} {" | "} {book.Author}");
                 }
+            }
+        }
+        public static void ShowCategories()
+        {
+            HashSet<string> uniqueCategories = new HashSet<string>();
+
+            foreach (var book in booksList)
+            {
+                if (book.Available == true)
+                {
+                    uniqueCategories.Add(book.Category);
+                }
+            }
+
+            foreach (var author in uniqueCategories)
+            {
+                Console.WriteLine(author);
             }
         }
         public static void ShowAuthors()
@@ -133,6 +156,15 @@ namespace Bibiotekav2
                     Console.WriteLine($"\n{book.NumberID} {" | "}  {book.Title} {" | "} {book.Author}");
                 else
                     continue;
+            }
+        }
+        public static void SearchBookbByCategory()
+        {
+            Console.WriteLine("Podaj nazwę kategorii");
+            string category= Console.ReadLine();
+            foreach (var book in Library.booksList.Where(x => x.Category == category))
+            {
+                Console.WriteLine($"{book.NumberID} {book.Title}");
             }
         }
         public static void SearchBookbByAuthor()

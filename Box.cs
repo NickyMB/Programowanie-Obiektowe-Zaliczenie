@@ -14,7 +14,7 @@ namespace Bibiotekav2
             ConsoleColor randomColor = (ConsoleColor)random.Next(1, 16); // Generuje losowy kolor czcionki
             Console.ForegroundColor = randomColor;
             // Definicje znaków do rysowania kwadratu
-            int TerminalWidth = Console.WindowWidth;
+            int TerminalWidth = Console.WindowWidth-5;
             int TerminalHeight = Console.WindowHeight;
 
             const char KPG = '┐';
