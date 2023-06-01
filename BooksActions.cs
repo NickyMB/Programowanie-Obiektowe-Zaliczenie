@@ -27,6 +27,7 @@ namespace Bibiotekav2
                     Console.WriteLine($"Książka {book.Title} została już wyporzyczona wybierz inną");
                 }
             }
+            Console.WriteLine("Poczekaj na wykonanie akcji");
             Thread.Sleep(1500);
             Navigate.Navigation();
         }
