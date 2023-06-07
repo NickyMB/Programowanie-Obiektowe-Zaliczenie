@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Bibiotekav2
-{   // class containing objects for books
+{   // Klasa z książkami
     internal class Book
     {
         public int NumberID { get; set; }
-        public string Title { get; set; } //Jest szukanie i wyświetlanie
-        public string Author { get; set; } //Jest szukanie i wyświetlanie
+        public string Title { get; set; }
+        public string Author { get; set; }
         public string ISBN_number { get; set; }
         public string Publisher { get; set; }
         public string Publication_year { get; set; }
-        public string Category { get; set; } //Jest szukanie i wyświetlanie
+        public string Category { get; set; }
         public bool Available { get; set; }
         public string Borrower { get; set; }
         public DateTime Borrow_date { get; set; }
@@ -31,6 +31,7 @@ namespace Bibiotekav2
             Category = category;
             Available = available;
         }
+        // Klasa używana podczas wypożyczania książek
         public Book(int numberID, string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available, string borrower, DateTime borrow_date)
         {
             NumberID = numberID;
@@ -44,6 +45,7 @@ namespace Bibiotekav2
             Borrower = borrower;
             Borrow_date = borrow_date;
         }
+        // Klasa używana podczas oddawania książek
         public Book(int numberID, string title, string author, string isbn_number, string publisher, string publication_year, string category, bool available, string borrower, DateTime borrow_date, DateTime return_date)
         {
             NumberID = numberID;
@@ -76,23 +78,6 @@ namespace Bibiotekav2
             Borrow_date = borrow_date;
             Return_date = return_date;
         }
-        // generate unique borrower number
-        public static int GenerateBorrowerNumber()
-        {
-            int i = 0;
-            int ran;
-            List<int> digits = new List<int>();
-            Random random = new Random();
-            do
-            {
-                ran = random.Next(1, 9999);
-                if (!digits.Contains(ran))
-                {
-                    digits.Add(ran);
-                    i = 1;
-                }
-            } while (i != 1);
-            return ran;
-        }
+
     }
 }

@@ -8,7 +8,8 @@ namespace Bibiotekav2
 {
     internal class Library
     {
-        public static List<Book> booksList = new List<Book>();
+        public static List<Book> booksList = new List<Book>(); //Lista z książkami
+        //Główna nawigacja strony Pokaż książki
         public static void Start()
         {
             while (true)
@@ -74,6 +75,7 @@ namespace Bibiotekav2
                 }
             }
         }
+        // Pokazywanie wszystkich dostępnych książek
         public static void ShowLibrary()
         {
             foreach (Book book in booksList)
@@ -84,6 +86,23 @@ namespace Bibiotekav2
                 }
             }
         }
+        // Wyświetlanie użytkowników
+        public static void PrintUsernames()
+        {
+            Dictionary<string, string> users = Loging.GetUsers();
+            Console.WriteLine("Lista urzytkowników:");
+            foreach (var username in users.Keys)
+            {
+                Console.Write($"{username} :");
+                foreach (var book in Library.booksList.Where(x => x.Borrower == username))
+                {
+                    Console.Write($"{book.Title} |");
+                }
+                Console.WriteLine("");
+            }
+            Navigate.Navigation();
+        }
+        // Szukanie książek po numeże ISBN
         public static void SearchBookbByISBN()
         {
             List<Book> matchingBooks = new List<Book>();
@@ -109,6 +128,7 @@ namespace Bibiotekav2
                     continue;
             }
         }
+        // Wyświetlanie Kategorii Książek
         public static void ShowCategories()
         {
             HashSet<string> uniqueCategories = new HashSet<string>();
@@ -126,6 +146,7 @@ namespace Bibiotekav2
                 Console.WriteLine(author);
             }
         }
+        // Wyświetlanie wszystkich Autorów
         public static void ShowAuthors()
         {
             HashSet<string> uniqueAuthors = new HashSet<string>();
@@ -143,6 +164,7 @@ namespace Bibiotekav2
                 Console.WriteLine(author);
             }
         }
+        // Pokazywanie wypożyczonych książek i osób które je wyporzyczyły
         public static void ShowUnavailable()
         {
             foreach (Book book in booksList)
@@ -153,6 +175,7 @@ namespace Bibiotekav2
                 }
             }
         }
+        // Pokazywanie ostatnio zwróconych książek
         public static void ShowLastReturns()
         {
             foreach (var book in Library.booksList.Where(x => x.Return_date != DateTime.Parse("01-01-0001 00:00:00")))
@@ -160,6 +183,7 @@ namespace Bibiotekav2
                 Console.WriteLine($"{book.Title} {" | "} {book.Borrower} {" | "} {book.Borrow_date} {" | "} {book.Return_date}");
             }
         }
+        // Szukanie książki po tytule
         public static void SearchBookbByTitle()
         {
             List<Book> matchingBooks = new List<Book>();
@@ -185,6 +209,7 @@ namespace Bibiotekav2
                     continue;
             }
         }
+        // Szukanie książki po Kategorii
         public static void SearchBookbByCategory()
         {
             bool check = true;
@@ -205,6 +230,7 @@ namespace Bibiotekav2
                 Console.WriteLine($"{book.NumberID} {book.Title}");
             }
         }
+        // Szukanie książki po autorze
         public static void SearchBookbByAuthor()
         {
             List<Book> matchingBooks = new List<Book>();
@@ -239,6 +265,7 @@ namespace Bibiotekav2
                 }
             }
         }
+        // Odczyt książek z pliku
         public static void ReadFromFile()
         {
             int number = 0;

@@ -8,11 +8,18 @@ namespace Bibiotekav2
 {
     internal class BooksActions
     {
+        // Porzyczanie książek
         public static void BorrowBooks()
         {
-            Console.WriteLine("Podaj Id Książki");
-            int number = Convert.ToInt32(Console.ReadLine());
-            foreach (var book in Library.booksList.Where(x => x.NumberID == number))
+            string number = "";
+            do
+            {
+
+                Console.WriteLine("Podaj Id Książki");
+                number = Console.ReadLine();
+
+            } while (string.IsNullOrEmpty(number));
+            foreach (var book in Library.booksList.Where(x => x.NumberID == Convert.ToInt32(number)))
             {
                 if (book.Available == true)
                 {
@@ -31,6 +38,7 @@ namespace Bibiotekav2
             Thread.Sleep(1500);
             Navigate.Navigation();
         }
+        // Pokazywanie książek użytkownika
         public static void ShowMyBooks()
         {
             foreach (var book in Library.booksList.Where(x => x.Borrower == Loging.username))
@@ -39,6 +47,7 @@ namespace Bibiotekav2
                 Console.WriteLine($"{book.Title} {" Data wyporzyczenia: "} {book.Borrow_date}");
             }
         }
+        //Zwracanie książek
         public static void ReturnMyBooks()
         {
             foreach (var book in Library.booksList.Where(x => x.Borrower == Loging.username))
@@ -46,9 +55,15 @@ namespace Bibiotekav2
                 Console.WriteLine("Twoje Książki to:");
                 Console.WriteLine($"{book.NumberID} {book.Title}");
             }
-            Console.Write("Podaj id książki: ");
-            int number = Convert.ToInt32(Console.ReadLine());
-            foreach (var book in Library.booksList.Where(x => x.NumberID == number))
+            string number = "";
+            do
+            {
+
+                Console.WriteLine("Podaj Id Książki");
+                number = Console.ReadLine();
+
+            } while (string.IsNullOrEmpty(number));
+            foreach (var book in Library.booksList.Where(x => x.NumberID == Convert.ToInt32(number)))
             {
                 book.Available = true;
                 book.Borrower = "";

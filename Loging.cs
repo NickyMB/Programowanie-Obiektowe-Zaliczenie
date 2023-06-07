@@ -7,19 +7,27 @@ using System.Security.Cryptography; // ad1
 
 class Loging
 {
+    // Słownik <dictionary> przechowujący nazwy użytkowników i hasła
     private static Dictionary<string, string> users = new Dictionary<string, string>();
+
+    // Metoda do odczytywania hasła z konsoli
+    public static Dictionary<string, string> GetUsers()
+    {
+        return users;
+    }
+
     public static bool IsUserLogged = false;
     public static bool IsAdminLogged = false;
-    public static string username;
+    public static string username = "";
 
 
-    // Admin credentials
+    // Dane do logowania administratora 
     private const string AdminUsername = "admin";
     private const string AdminPassword = "admin";
-
+    // panel logowania
     public static void LoginNav()
     {
-        Console.WriteLine("Witamy w panelu Logowania/Rejestracji!");
+
 
         while (true)
         {
@@ -37,8 +45,15 @@ class Loging
                 case ConsoleKey.Q:
                     if (IsUserLogged == true)
                         Navigate.Navigation();
-                    else
-                        Environment.Exit(0);
+                    Console.WriteLine("Czy na pewno chcesz wyjść? (T/N)");
+                    keyInfo = Console.ReadKey(true);
+                    switch (keyInfo.Key)
+                    {
+                        case ConsoleKey.T:
+                            Environment.Exit(0);
+                            break;
+                    }
+                    Console.Clear();
                     break;
                 default:
                     Console.WriteLine("Niewłaściwy wybór, wybierz ponownie");
@@ -46,15 +61,28 @@ class Loging
             }
         }
     }
-
+    // Funkcja odpowiadajaca za proces rejestracji
     static void Register()
     {
+        string loginRegexPattern = @"^[a-zA-Z0-9_]+$";// wyrażenie regularne do sprawdzania nazwy użytkownika i hasła
         Console.WriteLine("\n--- Rejestracja ---");
         Console.WriteLine("Odkryj magię kropki (.) i zakryj prawdziwe hasło!");
         Console.Write("Nazwa użytkownika: ");
         string username = Console.ReadLine();
+        // warunek sprawdzający czy nazwa użytkownika zawiera tylko litery, cyfry i znak podkreślenia względem wyrażenia regularnego
+        if (!System.Text.RegularExpressions.Regex.IsMatch(username, loginRegexPattern))
+        {
+            Console.WriteLine("Nazwa użytkownika może zawierać tylko litery, cyfry i znak podkreślenia.");
+            return;
+        }
         Console.Write("Hasło: ");
         string password = ReadMaskedPassword();
+        // warunek sprawdzający czy hasło zawiera tylko litery, cyfry i znak podkreślenia względem wyrażenia regularnego
+        if (!System.Text.RegularExpressions.Regex.IsMatch(password, loginRegexPattern))
+        {
+            Console.WriteLine("Hasło może zawierać tylko litery, cyfry i znak podkreślenia.");
+            return;
+        }
 
         // Sprawdź, czy użytkownik już istnieje
         if (UserExists(username))
@@ -68,10 +96,9 @@ class Loging
 
         // Przechowanie danych użytkownika w słowniku <dictionary>
         users.Add(username, encryptedPassword);
-
         Console.WriteLine("Sukces! Możesz teraz zalogować się i zacząć eksplorować Nasze biblioteczne bezkresy.");
     }
-
+    // Funkcja odpowiadajaca za proces logowania
     static void Login()
     {
         Console.WriteLine("\n--- Logowanie ---");
@@ -80,7 +107,7 @@ class Loging
         username = Console.ReadLine();
         Console.Write("Hasło: ");
         string password = ReadMaskedPassword();
-
+        // warunek umożliwiajacy administratowoi zalogowanie sie bez rejestracji
         if (username == AdminUsername && password == AdminPassword)
         {
             Console.WriteLine("Witaj, " + username + "!");
@@ -153,7 +180,7 @@ class Loging
         {
             keyInfo = Console.ReadKey(true);
 
-            // Toggle between showing the masked password and hiding it when the "." (dot) key is pressed
+            // przeskakuj pomiedzy pokazywaniem zakrytego hasla i ukrywaniem go, gdy nacisniety zostanie klawisz "." (kropka)
             if (keyInfo.KeyChar == '.')
             {
                 isMasked = !isMasked;
@@ -183,6 +210,4 @@ class Loging
 
         return passwordBuilder.ToString();
     }
-
-
 }

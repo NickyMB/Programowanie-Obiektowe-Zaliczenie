@@ -22,12 +22,11 @@ namespace Bibiotekav2
                 {
                     string data = client.DownloadString(url);
                     File.WriteAllText(filePath, data);
-                    // Console.WriteLine("Data fetched and saved successfully.");
+
                 }
             }
             catch (Exception ex)
             {
-                //Console.WriteLine($"Wystąpił błąd: {ex.Message}");
                 string text = $"Mały Książe;Antoine de Saint-Exupéry;9783140464079;Wilga;2018-02-28;Literatura dziecięca;true\nMetro 2033;Dmitrij Gluchowski;9789491425004;Insignis;2015-11-04;Fantastyka postapokaliptyczna;true\r\nMetro 2034;Dmitrij Gluchowski;9782841725434;Insignis;2015-11-04;Fantastyka postapokaliptyczna;true\r\nMetro 2035;Dmitrij Gluchowski;9783453315556;Insignis;2015-11-04;Fantastyka postapokaliptyczna;true";
                 try
                 {

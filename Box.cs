@@ -8,13 +8,14 @@ namespace Bibiotekav2
 {
     internal class Box
     {
+        //Stwożenie ramki wokół nawigacji
         public static void Border(string[] names)
         {
             Random random = new Random();
             ConsoleColor randomColor = (ConsoleColor)random.Next(1, 16); // Generuje losowy kolor czcionki
             Console.ForegroundColor = randomColor;
             // Definicje znaków do rysowania kwadratu
-            int TerminalWidth = Console.WindowWidth-5;
+            int TerminalWidth = Console.WindowWidth - 5;
             int TerminalHeight = Console.WindowHeight;
 
             const char KPG = '┐';
