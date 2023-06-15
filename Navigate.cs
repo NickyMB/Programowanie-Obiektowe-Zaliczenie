@@ -17,8 +17,7 @@ namespace Bibiotekav2
 
         public static void Navigation()
         {
-            Console.Clear();
-
+            //Console.Clear();
 
             if (Loging.IsAdminLogged == true)
                 Box.Border(Navigate.Main_Admin);

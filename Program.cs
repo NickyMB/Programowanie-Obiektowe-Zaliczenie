@@ -30,9 +30,9 @@ namespace Bibiotekav2
             Thread.Sleep(1500);
             Console.Clear();
             Console.WriteLine(@"
-                   o     _                
-|V| o  |  _  |  _  |    |_) _  _  o  _  __
-| | |  |<(_) | (_|_|    |_)(_|(_  | (_) | ");
+                    o     _                
+|V| o  |   _  |  _  |    |_) _  _  o  _  __
+| | |  |< (_) | (_|_|    |_)(_|(_  | (_) | ");
             Thread.Sleep(1500);
             Console.Clear();
             Console.WriteLine(@"

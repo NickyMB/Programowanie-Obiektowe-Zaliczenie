@@ -106,7 +106,7 @@ namespace Bibiotekav2
         public static void SearchBookbByISBN()
         {
             List<Book> matchingBooks = new List<Book>();
-            string searchISBN = Console.ReadLine();
+            string searchISBN;
             do
             {
                 Console.WriteLine("Podaj numer ISBN szukanej książki:");
@@ -187,7 +187,7 @@ namespace Bibiotekav2
         public static void SearchBookbByTitle()
         {
             List<Book> matchingBooks = new List<Book>();
-            string searchName = Console.ReadLine();
+            string searchName;
             do
             {
                 Console.WriteLine("Podaj tytuł szukanej książki:");

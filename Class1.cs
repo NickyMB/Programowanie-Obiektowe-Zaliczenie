@@ -78,6 +78,5 @@ namespace Bibiotekav2
             Borrow_date = borrow_date;
             Return_date = return_date;
         }
-
     }
 }

@@ -1,4 +1,1 @@
-Szukanie po pozostałych wartościach
-Admin panel (dodawanie książek, usuwanie książek, sprawdź listę użytkowników i jego książki)
-Czy na pewno chcesz wyjść
 Raport
