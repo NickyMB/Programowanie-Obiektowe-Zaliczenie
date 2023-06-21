@@ -27,7 +27,7 @@ class Loging
     // panel logowania
     public static void LoginNav()
     {
-
+        Console.Clear();
 
         while (true)
         {
