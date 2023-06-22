@@ -44,7 +44,7 @@ namespace Bibiotekav2
             foreach (var book in Library.booksList.Where(x => x.Borrower == Loging.username))
             {
                 Console.WriteLine("Twoje Książki to:");
-                Console.WriteLine($"{book.Title} {" Data wyporzyczenia: "} {book.Borrow_date}");
+                Console.WriteLine($"{book.Title} {" Data wypożyczenia: "} {book.Borrow_date}");
             }
         }
         //Zwracanie książek
